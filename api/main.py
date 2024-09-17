@@ -5,6 +5,7 @@ import os
 from api.routers import search, custom_verticals, ai_features, auth, documentation, root, analytics
 from api.config import settings
 from api.logger import setup_logging, get_logger
+from api.metrics import MetricsMiddleware, metrics_endpoint
 
 app = FastAPI(title="DevSearch API", version="1.0.0")
 
@@ -26,6 +27,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add Prometheus metrics middleware
+app.add_middleware(MetricsMiddleware)
+
 # Include routers
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
 app.include_router(custom_verticals.router, prefix="/api/v1/custom", tags=["custom"])
@@ -34,6 +38,9 @@ app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(documentation.router, prefix="/api/v1", tags=["documentation"])
 app.include_router(root.router, prefix="/api/v1")
 app.include_router(analytics.router, prefix="/api/v1", tags=["analytics"])
+
+# Metrics endpoint
+app.add_api_route("/metrics", metrics_endpoint, include_in_schema=False)
 
 if __name__ == "__main__":
     import uvicorn

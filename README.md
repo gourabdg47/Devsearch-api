@@ -120,3 +120,34 @@ To run the database connection test:
 ## License
 
 This project is licensed under the MIT License - see the [MIT License](https://github.com/gourabdg47/Devsearch-api/blob/master/LICENSE) file for details.
+
+## Analytics and Monitoring
+
+### Metrics Collection with Prometheus
+
+1. **Install Prometheus**:
+    ```bash
+    docker run -d -p 9090:9090 -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+    ```
+2. **Prometheus Configuration**:
+    Ensure `prometheus.yml` is set up to scrape the DevSearch API metrics.
+
+### Dashboard with Grafana
+
+1. **Install Grafana**:
+    ```bash
+    docker run -d -p 3000:3000 grafana/grafana
+    ```
+2. **Configure Data Source**:
+    - URL: `http://localhost:9090`
+3. **Create Dashboards**:
+    - Visualize request counts, latency, and other metrics.
+
+### Accessing Metrics
+
+- **Prometheus**: `http://localhost:9090`
+- **Grafana**: `http://localhost:3000` (default login: `admin/admin`)
+
+### Securing Metrics Endpoint
+
+Add your `METRICS_TOKEN` to the `.env` file and ensure secure access to the `/metrics` endpoint.
