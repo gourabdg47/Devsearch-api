@@ -1,0 +1,2 @@
+class UserAlreadyExistsError(ValueError):
+    pass

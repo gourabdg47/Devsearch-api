@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DevSearch API Documentation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1, h2, h3 {
+                color: #2c3e50;
+            }
+            code {
+                background-color: #f4f4f4;
+                padding: 2px 4px;
+                border-radius: 4px;
+            }
+            pre {
+                background-color: #f4f4f4;
+                padding: 10px;
+                border-radius: 4px;
+                overflow-x: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>DevSearch API Documentation</h1>
+
+        <h2>Project Overview</h2>
+        <p>DevSearch API is a powerful search engine API service that provides structured data from web searches. It offers customizable search verticals, AI-powered features, and developer-friendly tools.</p>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li>Basic search results in JSON format</li>
+            <li>Customizable search verticals</li>
+            <li>AI-powered content summarization</li>
+            <li>Multi-lingual support</li>
+            <li>Real-time trending topics</li>
+            <li>Developer-friendly features (SDKs, documentation)</li>
+        </ul>
+
+        <h2>Project Structure</h2>
+        <pre>
+    devsearch-api/
+    ├── api/
+    │   ├── main.py
+    │   ├── config.py
+    │   ├── dependencies.py
+    │   ├── db/
+    │   │   └── database.py
+    │   ├── models/
+    │   │   ├── custom_vertical.py
+    │   │   └── search_result.py
+    │   ├── routers/
+    │   │   ├── search.py
+    │   │   ├── custom_verticals.py
+    │   │   └── ai_features.py
+    │   └── services/
+    │       ├── search_engine.py
+    │       ├── custom_vertical_service.py
+    │       └── ai_service.py
+    ├── alembic/
+    │   ├── env.py
+    │   └── versions/
+    ├── tests/
+    │   └── db_test.py
+    ├── alembic.ini
+    └── requirements.txt
+        </pre>
+
+        <h2>Key Components</h2>
+
+        <h3>1. Main Application (api/main.py)</h3>
+        <p>The entry point of the application, setting up FastAPI and including routers.</p>
+        <p>Reference: 
+        <code>devsearch-api/api/main.py</code>
+        </p>
+
+        <h3>2. Configuration (api/config.py)</h3>
+        <p>Manages application settings using Pydantic BaseSettings.</p>
+        <p>Reference: 
+        <code>devsearch-api/api/config.py</code>
+        </p>
+
+        <h3>3. Database (api/db/database.py)</h3>
+        <p>Sets up the database connection using SQLAlchemy.</p>
+        <p>Reference: 
+        <code>devsearch-api/api/db/database.py</code>
+        </p>
+
+        <h3>4. Models</h3>
+        <p>Define data structures for the application.</p>
+        <ul>
+            <li>Custom Vertical Model (api/models/custom_vertical.py)</li>
+            <li>Search Result Model (api/models/search_result.py)</li>
+        </ul>
+
+        <h3>5. Routers</h3>
+        <p>Handle API endpoints for different features.</p>
+        <ul>
+            <li>Search Router (api/routers/search.py)</li>
+            <li>Custom Verticals Router (api/routers/custom_verticals.py)</li>
+            <li>AI Features Router (api/routers/ai_features.py)</li>
+        </ul>
+
+        <h3>6. Services</h3>
+        <p>Implement core business logic.</p>
+        <ul>
+            <li>Search Engine Service (api/services/search_engine.py)</li>
+            <li>Custom Vertical Service (api/services/custom_vertical_service.py)</li>
+            <li>AI Service (api/services/ai_service.py)</li>
+        </ul>
+
+        <h3>7. Dependencies (api/dependencies.py)</h3>
+        <p>Manages dependency injection for the application.</p>
+        <p>Reference: 
+        <code>devsearch-api/api/dependencies.py</code>
+        </p>
+
+        <h3>8. Database Migrations (alembic/)</h3>
+        <p>Handles database schema migrations using Alembic.</p>
+        <p>Reference: 
+        <code>devsearch-api/alembic/env.py</code>
+        </p>
+
+        <h2>Setup and Running</h2>
+        <ol>
+            <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+            <li>Set up the database and run migrations: <code>alembic upgrade head</code></li>
+            <li>Run the application: <code>uvicorn api.main:app --reload</code></li>
+        </ol>
+
+        <h2>API Endpoints</h2>
+        <ul>
+            <li><code>GET /api/v1/search/</code>: Perform a search</li>
+            <li><code>POST /api/v1/custom/</code>: Create a custom vertical</li>
+            <li><code>GET /api/v1/custom/</code>: List custom verticals</li>
+            <li><code>GET /api/v1/custom/{vertical_id}</code>: Get a specific custom vertical</li>
+            <li><code>GET /api/v1/ai/summarize</code>: Summarize text using AI</li>
+        </ul>
+
+        <h2>Testing</h2>
+        <p>A basic database connection test is provided in <code>tests/db_test.py</code>. More comprehensive tests should be implemented for each component.</p>
+
+        <h2>Future Improvements</h2>
+        <ul>
+            <li>Implement user authentication and authorization</li>
+            <li>Add more AI features (sentiment analysis, entity recognition)</li>
+            <li>Implement caching mechanisms for improved performance</li>
+            <li>Create SDKs for popular programming languages</li>
+            <li>Implement the blockchain verification feature</li>
+            <li>Develop a frontend developer portal</li>
+        </ul>
+    </body>
+</html>

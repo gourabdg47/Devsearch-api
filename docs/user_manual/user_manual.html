@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSearch API User Manual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+        }
+        #content {
+            flex: 1;
+            padding-right: 20px;
+        }
+        #menu {
+            width: 250px;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .menu-category {
+            margin-bottom: 10px;
+        }
+        .menu-category > a {
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .menu-subcategory {
+            margin-left: 15px;
+        }
+        .menu-subcategory a {
+            color: #34495e;
+            text-decoration: none;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>DevSearch API User Manual</h1>
+
+        <h2 id="introduction">1. Introduction</h2>
+        <p>DevSearch API is a powerful search engine API service designed to provide structured data from web searches. It offers customizable search verticals, AI-powered features, and developer-friendly tools, making it an invaluable resource for professionals in various fields.</p>
+
+        <h2 id="key-features">2. Key Features</h2>
+        <ul>
+            <li>Basic search results in JSON format</li>
+            <li>Customizable search verticals</li>
+            <li>AI-powered content summarization</li>
+            <li>Multi-lingual support</li>
+            <li>Real-time trending topics</li>
+            <li>Developer-friendly features (SDKs, documentation)</li>
+        </ul>
+
+        <h2 id="benefits">3. Benefits for Professionals</h2>
+        <p>DevSearch API offers numerous benefits for professionals across various industries:</p>
+        <ul>
+            <li><strong>Developers:</strong> Easy integration of powerful search capabilities into applications</li>
+            <li><strong>Data Scientists:</strong> Access to structured data for analysis and machine learning projects</li>
+            <li><strong>Researchers:</strong> Efficient information gathering from multiple sources</li>
+            <li><strong>Content Creators:</strong> Quick access to relevant information and summarization tools</li>
+            <li><strong>Business Analysts:</strong> Real-time trend analysis and market insights</li>
+        </ul>
+
+        <h2 id="architecture">4. Architecture Overview</h2>
+        <p>DevSearch API is built on a modern, scalable architecture:</p>
+        <ul>
+            <li><strong>FastAPI Framework:</strong> High-performance, easy-to-use web framework for building APIs</li>
+            <li><strong>Elasticsearch:</strong> Powerful search and analytics engine for efficient data retrieval</li>
+            <li><strong>PostgreSQL:</strong> Robust relational database for storing user data and custom verticals</li>
+            <li><strong>Redis:</strong> In-memory data structure store for caching and improving performance</li>
+            <li><strong>AI/ML Components:</strong> Integration of TensorFlow and Transformers for advanced features</li>
+        </ul>
+
+        <h2 id="getting-started">5. Getting Started</h2>
+        <h3 id="installation">5.1 Installation</h3>
+        <p>To set up the DevSearch API, follow these steps:</p>
+        <ol>
+            <li>Clone the repository</li>
+            <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+            <li>Set up the database and run migrations: <code>alembic upgrade head</code></li>
+            <li>Start the application: <code>uvicorn api.main:app --reload</code></li>
+        </ol>
+
+        <h3 id="configuration">5.2 Configuration</h3>
+        <p>Configure the API by setting environment variables or updating the <code>.env</code> file. Key settings include:</p>
+        <ul>
+            <li>Database URL</li>
+            <li>Elasticsearch URL</li>
+            <li>API secret key</li>
+            <li>Allowed origins for CORS</li>
+        </ul>
+
+        <h2 id="api-usage">6. API Usage</h2>
+        <h3 id="authentication">6.1 Authentication</h3>
+        <p>DevSearch API uses JWT for authentication. To access protected endpoints:</p>
+        <ol>
+            <li>Register a new user account</li>
+            <li>Obtain an access token using your credentials</li>
+            <li>Include the token in the Authorization header for API requests</li>
+        </ol>
+        <p>Sample payload for user registration (POST /api/v1/auth/register):</p>
+        <pre><code>{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "securepassword123"
+}</code></pre>
+        <p>Sample payload for obtaining an access token (POST /api/v1/auth/token):</p>
+        <pre><code>{
+  "username": "newuser",
+  "password": "securepassword123"
+}</code></pre>
+
+        <h3 id="search">6.2 Performing Searches</h3>
+        <p>To perform a search, send a GET request to the <code>/api/v1/search/</code> endpoint with the following parameters:</p>
+        <ul>
+            <li><code>q</code>: Search query</li>
+            <li><code>vertical</code>: Search vertical (default: "web")</li>
+            <li><code>limit</code>: Number of results (default: 10, max: 100)</li>
+        </ul>
+        <p>Sample request:</p>
+        <pre><code>GET /api/v1/search/?q=artificial+intelligence&vertical=web&limit=5</code></pre>
+
+        <h3 id="custom-verticals">6.3 Custom Verticals</h3>
+        <p>Custom verticals allow developers to tailor search results to specific domains or topics. This feature is particularly useful for creating specialized search experiences. Here's how to create and use custom verticals:</p>
+
+        <h4>Steps to Create a Custom Vertical:</h4>
+        <ol>
+            <li>Authenticate: Ensure you have a valid access token.</li>
+            <li>Send a POST request to <code>/api/v1/custom/</code> with the following payload:</li>
+        </ol>
+        <pre><code>{
+  "name": "tech_news",
+  "description": "Custom vertical for technology news",
+  "query_fields": ["title", "content"],
+  "filters": {
+    "sites": ["techcrunch.com", "theverge.com", "wired.com"],
+    "keywords": ["technology", "gadgets", "innovation"]
+  }
+}</code></pre>
+        <ol start="3">
+            <li>The API will return the created custom vertical with an assigned ID.</li>
+        </ol>
+
+        <h4>Using Custom Verticals:</h4>
+        <ul>
+            <li>List your custom verticals: GET <code>/api/v1/custom/</code></li>
+            <li>Get a specific custom vertical: GET <code>/api/v1/custom/{vertical_id}</code></li>
+            <li>Use in searches: Add the <code>vertical</code> parameter to your search requests, e.g., <code>/api/v1/search/?q=ai&vertical=tech_news</code></li>
+        </ul>
+
+        <h4>Benefits for Developers:</h4>
+        <ul>
+            <li><strong>Focused Results:</strong> Obtain more relevant search results for specific domains or topics.</li>
+            <li><strong>Customized Search Experience:</strong> Create unique search features for different sections of your application.</li>
+            <li><strong>Improved Relevance:</strong> Fine-tune search results based on predefined sources and keywords.</li>
+            <li><strong>Efficient Filtering:</strong> Reduce post-processing of search results by applying filters at the search level.</li>
+            <li><strong>Scalability:</strong> Easily manage multiple search verticals for different use cases within your application.</li>
+        </ul>
+
+        <p>By leveraging custom verticals, developers can create more powerful and tailored search experiences, enhancing the overall functionality and user satisfaction of their applications.</p>
+
+        <h3 id="ai-features">6.4 AI Features</h3>
+        <p>Utilize AI-powered features like content summarization:</p>
+        <ul>
+            <li>Summarize text: POST <code>/api/v1/ai/summarize</code></li>
+        </ul>
+        <p>Sample payload for text summarization in Postman:</p>
+        <pre><code>{
+  "text": "Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals. The term 'artificial intelligence' is often used to describe machines (or computers) that mimic 'cognitive' functions that humans associate with the human mind, such as 'learning' and 'problem solving'.",
+  "max_length": 100
+}</code></pre>
+
+        <p>To use this in Postman:</p>
+        <ol>
+            <li>Set the request type to POST</li>
+            <li>Enter the URL: <code>http://localhost:8000/api/v1/ai/summarize</code></li>
+            <li>In the Headers tab, add:
+                <ul>
+                    <li>Key: <code>Content-Type</code>, Value: <code>application/json</code></li>
+                    <li>Key: <code>Authorization</code>, Value: <code>Bearer YOUR_ACCESS_TOKEN</code></li>
+                </ul>
+            </li>
+            <li>In the Body tab, select "raw" and choose "JSON" from the dropdown</li>
+            <li>Paste the sample payload above into the body</li>
+            <li>Click "Send" to make the request</li>
+        </ol>
+
+        <p>This will return a summarized version of the input text, limited to approximately 100 words.</p>
+
+        <h2 id="advanced-usage">7. Advanced Usage</h2>
+        <h3 id="rate-limiting">7.1 Rate Limiting</h3>
+        <p>The API implements rate limiting to ensure fair usage. Be mindful of the request limits and implement appropriate error handling in your applications.</p>
+
+        <h3 id="caching">7.2 Caching</h3>
+        <p>Implement caching mechanisms in your applications to improve performance and reduce unnecessary API calls.</p>
+
+        <h2 id="best-practices">8. Best Practices</h2>
+        <ul>
+            <li>Use specific and focused search queries for better results</li>
+            <li>Implement error handling for robust applications</li>
+            <li>Utilize custom verticals for domain-specific searches</li>
+            <li>Leverage AI features for advanced data processing</li>
+        </ul>
+
+        <h2 id="troubleshooting">9. Troubleshooting</h2>
+        <p>Common issues and their solutions:</p>
+        <ul>
+            <li>Authentication errors: Ensure your access token is valid and properly included in requests</li>
+            <li>Rate limiting: Implement backoff strategies in your applications</li>
+            <li>Search result issues: Refine your search query or try different verticals</li>
+        </ul>
+
+        <h2 id="support">10. Support and Resources</h2>
+        <ul>
+            <li>API Documentation: Refer to the OpenAPI documentation for detailed endpoint information</li>
+            <li>Community Forums: Join our community forums for discussions and support</li>
+            <li>Contact Support: For critical issues, contact our support team</li>
+        </ul>
+    </div>
+
+    <div id="menu">
+        <h3>Contents</h3>
+        <div class="menu-category">
+            <a href="#introduction">1. Introduction</a>
+        </div>
+        <div class="menu-category">
+            <a href="#key-features">2. Key Features</a>
+        </div>
+        <div class="menu-category">
+            <a href="#benefits">3. Benefits for Professionals</a>
+        </div>
+        <div class="menu-category">
+            <a href="#architecture">4. Architecture Overview</a>
+        </div>
+        <div class="menu-category">
+            <a href="#getting-started">5. Getting Started</a>
+            <div class="menu-subcategory">
+                <a href="#installation">5.1 Installation</a>
+                <a href="#configuration">5.2 Configuration</a>
+            </div>
+        </div>
+        <div class="menu-category">
+            <a href="#api-usage">6. API Usage</a>
+            <div class="menu-subcategory">
+                <a href="#authentication">6.1 Authentication</a>
+                <a href="#search">6.2 Performing Searches</a>
+                <a href="#custom-verticals">6.3 Custom Verticals</a>
+                <a href="#ai-features">6.4 AI Features</a>
+            </div>
+        </div>
+        <div class="menu-category">
+            <a href="#advanced-usage">7. Advanced Usage</a>
+            <div class="menu-subcategory">
+                <a href="#rate-limiting">7.1 Rate Limiting</a>
+                <a href="#caching">7.2 Caching</a>
+            </div>
+        </div>
+        <div class="menu-category">
+            <a href="#best-practices">8. Best Practices</a>
+        </div>
+        <div class="menu-category">
+            <a href="#troubleshooting">9. Troubleshooting</a>
+        </div>
+        <div class="menu-category">
+            <a href="#support">10. Support and Resources</a>
+        </div>
+    </div>
+</body>
+</html>
