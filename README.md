@@ -125,5 +125,3 @@ This project is licensed under the MIT License - see the [MIT License](https://g
 ### Securing Metrics Endpoint
 
 Add your `METRICS_TOKEN` to the `.env` file and ensure secure access to the `/metrics` endpoint.
-=======
->>>>>>> 760f83588502958aebb9751ddac8f9191cc10db3
