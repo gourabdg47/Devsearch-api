@@ -23,35 +23,6 @@ DevSearch API is a powerful search engine API service that provides structured d
 - Real-time trending topics
 - Developer-friendly features (SDKs, documentation)
 
-## Project Structure
-
-devsearch-api/
-├── api/
-│ ├── main.py
-│ ├── config.py
-│ ├── dependencies.py
-│ ├── db/
-│ │ └── database.py
-│ ├── models/
-│ │ ├── custom_vertical.py
-│ │ └── search_result.py
-│ ├── routers/
-│ │ ├── search.py
-│ │ ├── custom_verticals.py
-│ │ └── ai_features.py
-│ └── services/
-│ ├── search_engine.py
-│ ├── custom_vertical_service.py
-│ └── ai_service.py
-├── alembic/
-│ ├── env.py
-│ └── versions/
-├── tests/
-│ └── db_test.py
-├── alembic.ini
-└── requirements.txt
-
-
 ## Installation
 
 1. Clone the repository:
