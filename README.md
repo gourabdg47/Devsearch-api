@@ -128,6 +128,8 @@ This project is licensed under the MIT License - see the [MIT License](https://g
 1. **Install Prometheus**:
     ```bash
     docker run -d -p 9090:9090 -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+    OR
+    docker run -d --name devsearch-prometheus -p 9090:9090 -v prometheus.yml prom/prometheus
     ```
 2. **Prometheus Configuration**:
     Ensure `prometheus.yml` is set up to scrape the DevSearch API metrics.
